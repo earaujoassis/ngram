@@ -8,9 +8,11 @@ defmodule Ngram do
   end
 
   def tokenize(str) do
-    grams = str |> String.split(" ") |> Enum.map(fn s -> String.replace(s, ~r/[,.!?]/, "") end)
-    result = Enum.map(1..length(grams), fn n -> _each_cons(grams, n, []) end) |> Enum.concat
-    result = result |> Enum.map(fn s -> Enum.join(s, " ") end)
-    result
+    grams = str |>
+      String.split(" ") |>
+      Enum.map(fn s -> String.replace(s, ~r/[,.!?]/, "") end)
+    Enum.map(1..length(grams), fn n -> _each_cons(grams, n, []) end) |>
+      Enum.concat |>
+      Enum.map(fn s -> Enum.join(s, " ") end)
   end
 end
